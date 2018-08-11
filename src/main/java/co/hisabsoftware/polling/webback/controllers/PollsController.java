@@ -36,7 +36,13 @@ public class PollsController {
      * @return
      */
 	@GetMapping
-    public List<Poll> getAll(@RequestParam int limit, @RequestParam int page) {
+    public List<Poll> getAll(@RequestParam(required = false) int limit, @RequestParam(required = false) int page) {
+	    if (limit == 0) {
+	        limit = 20;
+        }
+        if (page == 0) {
+	        page = 1;
+        }
 	    return service.getPolls(limit, page);
     }
 

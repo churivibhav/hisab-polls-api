@@ -1,9 +1,10 @@
 language: java
 jdk:
-  - openjdk8
+- openjdk8
 sudo: false
-script: ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true
+script: "./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true"
 before_install:
-  - chmod +x mvnw
+- chmod +x mvnw
 notifications:
-  slack: hisab:ItSiQ7F60KhRN7YeiGsYb1Hw
+  slack:
+    secure: q5+kbRNJ3MsR12a3UfesqCBEreAewiRrzVcWkvW8HDrBwOdktZ8UTwAbDuIlWE8xGBN+gdacSA3ppj5eor1EJV1GTMHt8QkxRjqYDbEQLUxuV67+FFbPTgYZKE/tuukmefq3AGyazWLXljEWv9l0laQ8v1pjCJt/1rKFilCyMl3Ha/LhnReAZ9VTxYZkyRRWJGUAj3YOf4v4L5FuR2EAw45khLOaq3pOCQPRjcQESM/s5D3ycIof0u+kjCfk6jv/9Kko3tnZxYggDKKROZVpyecDL1CcURodFi0tBVdAgvdroYjulIYdZSA5NdZk6FNyo6kNvGBKGsvhDzEbU/6oFyRiloOyWbst2y0hN0bh2/eKItuT53Uema78/hMwkykmzTWFKJ/EpcXaD7H3VB/LcTs/+EjgZWZIU/UBQ/Zq47wZEqYvLDx20pkAWBEthdrV6yqMliZcgtV1lAVAAM+SqjitKjk9jQ1bPMyLTilgqDwc8R77uUyO6DzK1UHyHJhu+XVYVKazQOT3/zXr+/l3r+ebw3LldGCu0D87KKwx3ZOSxw2Fd1fc3MXyWoGpgT67lgocQUldavtBjRU9ET/jnxZKUJ3MUq5RJGTRZwAZwt28RncYS3vh7OOxbjwX4UiJ8/8UBOBWultoQmQJWVns0o1rE9/TSGWEMaM0M0Q5QQI=
