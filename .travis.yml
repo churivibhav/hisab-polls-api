@@ -5,3 +5,5 @@ sudo: false
 script: ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true
 before_install:
   - chmod +x mvnw
+notifications:
+  slack: hisab:ItSiQ7F60KhRN7YeiGsYb1Hw
