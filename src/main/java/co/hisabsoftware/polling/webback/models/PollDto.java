@@ -1,11 +1,11 @@
 package co.hisabsoftware.polling.webback.models;
 
-public class Poll {
+public class PollDto {
 	private int id;
 	private String text;
 	
 	
-	public Poll(int id, String text) {
+	public PollDto(int id, String text) {
 		super();
 		this.id = id;
 		this.text = text;
