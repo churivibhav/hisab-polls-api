@@ -2,11 +2,9 @@ package co.hisabsoftware.polling.webback.services;
 
 import co.hisabsoftware.polling.webback.Repositories.PollRepository;
 import co.hisabsoftware.polling.webback.models.PollDto;
-import co.hisabsoftware.polling.webback.services.mapping.MapperService;
+import co.hisabsoftware.polling.webback.mapping.MapperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
