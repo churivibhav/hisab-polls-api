@@ -1,49 +1,49 @@
 package co.hisabsoftware.polling.webback.services;
 
-import co.hisabsoftware.polling.webback.models.Poll;
+import co.hisabsoftware.polling.webback.Repositories.PollRepository;
+import co.hisabsoftware.polling.webback.models.PollDto;
+import co.hisabsoftware.polling.webback.services.mapping.MapperService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
-public class PollService {
+public class PollService implements IObjectService<PollDto> {
 
-    private List<Poll> polls;
+    @Autowired
+    private PollRepository repository;
+    @Autowired
+    private MapperService mapper;
 
-    PollService () {
-        polls = new ArrayList<Poll>() {
-            {
-                add(new Poll(1, "Limit"));
-                add(new Poll(2, "Page"));
-            }
-        };
+    @Override
+    public Optional<PollDto> get(int id) {
+        return repository.findById(id).map(p -> mapper.toDto(p));
     }
 
-    public Optional<Poll> getPoll(int id) {
-        return polls.stream().filter(p -> p.getId() == id).findFirst();
+    @Override
+    public List<PollDto> get(int limit, int page) {
+       return repository.findAll(PageRequest.of(page, limit))
+               .map(p -> mapper.toDto(p))
+               .getContent();
     }
 
-    public List<Poll> getPolls(int limit, int page) {
-        return polls.stream().skip((page - 1)* limit).limit(limit).collect(Collectors.toList());
+    @Override
+    public void create(PollDto object) {
+        repository.save(mapper.toNewEntity(object));
     }
 
-    public void createPoll(Poll poll) {
-        poll.setId(polls.size()); // Auto increment id
-        polls.add(poll);
+    @Override
+    public void update(int id, PollDto object) {
+        repository.save(mapper.toUpdatedEntity(repository.findById(id).get(), object));
     }
 
-    public void updatePoll(int id, Poll poll) {
-        deletePoll(id);
-        polls.add(poll);
-    }
-
-    public void deletePoll(int id) {
-        polls = polls.stream().filter(p -> p.getId() != id)
-                .sorted(Comparator.comparingInt(Poll::getId))
-                .collect(Collectors.toList());
+    @Override
+    public void delete(int id) {
+        repository.deleteById(id);
     }
 }
