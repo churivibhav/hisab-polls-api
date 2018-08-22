@@ -1,9 +1,7 @@
 package co.hisabsoftware.polling.webback.controllers;
 
-import co.hisabsoftware.polling.webback.services.InMemoryPollService;
 import co.hisabsoftware.polling.webback.services.PollService;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,14 +25,10 @@ public class PollsController {
      * @param id
      * @return
      */
-	@GetMapping("/polls/{id}")
-	public ResponseEntity<PollDto> getPollByid(@PathVariable("id") int id) {
-		
-		String text = "test";
-		PollDto pdt =new PollDto(id, text);
-		BeanUtils.copyProperties(service.get(id), pdt);
-       // return service.get(id).orElse(new PollDto(0, "None"));
-        return new ResponseEntity<PollDto>(pdt,HttpStatus.OK);
+	@GetMapping("{id}")
+	public ResponseEntity<PollDto> getOne(@PathVariable("id") int id) {
+        PollDto dto = service.get(id).orElse(new PollDto(0, "None"));
+        return new ResponseEntity<PollDto>(dto, HttpStatus.OK);
 	}
 
     /**

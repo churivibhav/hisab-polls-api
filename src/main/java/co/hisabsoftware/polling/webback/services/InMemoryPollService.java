@@ -1,7 +1,6 @@
 package co.hisabsoftware.polling.webback.services;
 
 import co.hisabsoftware.polling.webback.models.PollDto;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Comparator;

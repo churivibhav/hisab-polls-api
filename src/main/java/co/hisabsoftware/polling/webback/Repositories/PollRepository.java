@@ -1,6 +1,6 @@
 package co.hisabsoftware.polling.webback.Repositories;
 
-import co.hisabsoftware.polling.webback.Entities.Poll;
+import co.hisabsoftware.polling.webback.entities.Poll;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
