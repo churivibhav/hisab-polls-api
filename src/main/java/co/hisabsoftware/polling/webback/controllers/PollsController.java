@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import co.hisabsoftware.polling.webback.models.PollDto;
 
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.Objects.nonNull;
 
@@ -27,8 +28,12 @@ public class PollsController {
      */
 	@GetMapping("{id}")
 	public ResponseEntity<PollDto> getOne(@PathVariable("id") int id) {
-        PollDto dto = service.get(id).orElse(new PollDto(0, "None"));
-        return new ResponseEntity<PollDto>(dto, HttpStatus.OK);
+        Optional<PollDto> dto = service.get(id);
+        if(((Optional) dto).isPresent()) {
+            return new ResponseEntity<>(dto.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
 	}
 
     /**
@@ -48,22 +53,28 @@ public class PollsController {
      * @param pollDto
      */
     @PostMapping
-    public void post(@RequestBody PollDto pollDto) {
+    public ResponseEntity post(@RequestBody PollDto pollDto) {
 	    if (nonNull(pollDto)) {
             service.create(pollDto);
+            return new ResponseEntity(HttpStatus.CREATED);
         }
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping("{id}")
-    public void put(@PathVariable int id, @RequestBody PollDto pollDto) {
+    public ResponseEntity put(@PathVariable int id, @RequestBody PollDto pollDto) {
         if (nonNull(pollDto)) {
             service.update(id, pollDto);
+            return new ResponseEntity(HttpStatus.OK);
         }
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        // Responses as per : https://stackoverflow.com/questions/797834/should-a-restful-put-operation-return-something
     }
 
     @DeleteMapping("{id}")
-    public void delete(@PathVariable int id) {
+    public ResponseEntity delete(@PathVariable int id) {
         service.delete(id);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
 }
