@@ -1,0 +1,2 @@
+insert into poll ( title, description, active, shared)
+values ('ABC', 'DEF', 1, 1);
