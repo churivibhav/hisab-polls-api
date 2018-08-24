@@ -15,6 +15,7 @@ import java.util.Optional;
 import static java.util.Objects.nonNull;
 
 @RestController
+@CrossOrigin(allowedHeaders = "Hisab")
 @RequestMapping("/api/polls")
 public class PollsController {
 
